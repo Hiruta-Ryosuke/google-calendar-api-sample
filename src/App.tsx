@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import GoogleApi from "./GoogleApi";
+import { Stack } from "@mui/material";
+import Login from "./Login";
+import { useState } from "react";
+import ApiCalendar from "react-google-calendar-api";
+import "./CalendarApp.css";
 
 function App() {
+  const [apiCalendar, setApiCalendar] = useState<ApiCalendar | undefined>(
+    undefined
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stack alignItems="center">
+      <p className="title">GoogleカレンダーAPIサンプル</p>
+      {apiCalendar ? (
+        <GoogleApi apiCalendar={apiCalendar} />
+      ) : (
+        <Login setApiCalendar={setApiCalendar} />
+      )}
+    </Stack>
   );
 }
 
